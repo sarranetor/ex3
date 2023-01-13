@@ -1,4 +1,17 @@
 #include <vector>
+#include "Eigen/Dense"
+#include "types.hpp"
+
+#ifndef DATA_H
+#define DATA_H
+
+#define PI 3.14159265
+
+struct  {
+    double radius{30}; //m
+    double azimuth{0.009 * 180/PI}; //degree
+    double velocity{1}; //m/s
+} measure_stdv;
 
 std::vector<double> radius_measurement{4253.595724013049, 4342.068802974521, 4233.9360615137675, 4326.122630637821,
                              4314.813736298536, 4291.696443774744, 4386.953317943045, 4373.898542038088, 4368.300202072035,
@@ -18,3 +31,27 @@ std::vector<double> velocity_measurement{20.21335251225024, 22.233628310848825, 
                             21.223332454423463, 19.66283239701565, 22.165630179860873, 21.30942358054975, 21.897227489660303, 20.657089727951274, 
                             24.11172097535575, 21.2591283134228, 22.827589405934013, 21.065122814474073, 22.651845721102696, 20.65469277258423, 
                             21.933699936033594, 23.26809347577007};
+
+// ..
+int get_n_measurements() {
+    int n = radius_measurement.size();
+    return n;
+};
+
+// ..
+Eigen::MatrixXd get_zk() {
+    int n = radius_measurement.size();
+    
+    Eigen::MatrixXd zk;
+    zk.resize(3, n);
+
+    for (int i=0; i<n; i++) {
+        zk(0,i) = radius_measurement.at(i);
+        zk(1,i) = azimith_measurement.at(i);
+        zk(2,i) = velocity_measurement.at(i);
+        }
+
+    return zk;
+};
+
+#endif
