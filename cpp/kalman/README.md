@@ -6,15 +6,18 @@ Eigen library is used for Matrix operations, it is a code dependency. Eigen is a
     jhdsjssdskdhskjdh
 
 ## README Sections
-1. d
-2. fdf
+1. Introducrion
+2. Model Description
+3. Results
+4. Conclusions
+5. Reference
+6. Appendix A
 
 # 1 Introduction
 
+Compute position (x,y) and velocity (x_vel, y_vel) of an object in motion thanks to a radar with Kalman filter. 
 
-
-## 1.1 Problem Description 
-Compute position (x,y) and velocity (x_vel, y_vel) of an object in motion thanks to a radar with Kalman filter. In **Appendix A** a more in depth description on Kalman theory is provided.
+## 1.1 Radar System
 
 Radar System:
 ![Radar System](/cpp/kalman/figs/fig1.png)
@@ -25,7 +28,7 @@ Radar measurement output each T time:
 
 The signals coming from the radar are assumed to have a certain error compared to the true radius, azimuth and velocity. 
 
-This error is assumed to be gaussian with a certain varience: **var_r**,  **var_az**,  **var_v**.
+This error is assumed to be gaussian with a certain varience: **var_r**,  **var_az**,  **var_vel**.
 
 # 2 Model Description
 
@@ -105,6 +108,12 @@ Where **Q** is the process error covariance matrix. It provides and indication o
 
 The designed filter will be tested with different simulated measures and the filtered signal will be compared with the non-filtered one.
 
+In all tests the measurement error of our radar system is the following:
+
+    var_r=std_r^2  where std_r=30 [m]
+    var_az= std_az^2  where std_az=0.009*180/PI [degree]
+    var_vel=std_vel^2  where std_vel=1 [m/s]
+
 1. only vel_x=22 m/s - init_position=(x0=3000, y0=3000) - n_iteration=100
 
 ![Radar System](/cpp/kalman/figs/onlyvelx_xy_100p.png)
@@ -149,6 +158,11 @@ The filter has been shown improvements over the measured data in all reported te
 The observation model law was non linear, which made necessary the usage of the exstended kalman filter. Future possible work could be implementing an uscended kalman kilter to tackle the non linearity and compare performance with the exstended kalman implementation. Also a constant acceleration process model could be implemented instead of a constant velocity one and results could be compared.
 
 # 5 References
+
+[1] https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf
+[2]: https://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf
+[3]: https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+[4]: https://thekalmanfilter.com/
 
 # 6 Appendix A
 
