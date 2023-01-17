@@ -5,11 +5,15 @@ Eigen library is used for Matrix operations, it is a code dependency. Eigen is a
 
     jhdsjssdskdhskjdh
 
-# Introduction
+## README Sections
+1. d
+2. fdf
+
+# 1 Introduction
 
 
 
-## Problem Description 
+## 1.1 Problem Description 
 Compute position (x,y) and velocity (x_vel, y_vel) of an object in motion thanks to a radar with Kalman filter. In **Appendix A** a more in depth description on Kalman theory is provided.
 
 Radar System:
@@ -23,11 +27,11 @@ The signals coming from the radar are assumed to have a certain error compared t
 
 This error is assumed to be gaussian with a certain varience: **var_r**,  **var_az**,  **var_v**.
 
-# Model Description
+# 2 Model Description
 
 To implement the Kalman filter is necessary to work out the process model and the observations model. In **Appendix A** a more in depth description on Kalman theory is provided.
 
-## Process Model
+## 2.1 Process Model
 A constant velocity model is assumed. Thus:
 
 $x = x_0 + v*dt$
@@ -49,7 +53,7 @@ Thus the state transition matrix A is
 
 Where $w_k$ is the process noise. it is assumed gaussian.
 
-## Observation Model
+## 2.2 Observation Model
 
 $z_k = [radius, azimuth, velocity]$
 
@@ -67,7 +71,7 @@ The relation is non linear thus the **Exstended** kalman filter needs to be used
          x/(y*y + x*x),   - y/(y*y + x*x),     0, 0,
          0,     0,     y_vel/sqrt(y_vel^2+ x_vel^2), x_vel/sqrt(y_vel^2+ x_vel^2)]
 
-## Kalman filtering
+## 2.3 Kalman filtering
 
 Algorithm:
 
@@ -97,7 +101,7 @@ Where **Q** is the process error covariance matrix. It provides and indication o
           0, 0, 4, 0,  // hp ..
           0, 0, 0, 4] 
 
-# Results 
+# 3 Results 
 
 The designed filter will be tested with different simulated measures and the filtered signal will be compared with the non-filtered one.
 
@@ -136,8 +140,16 @@ The designed filter will be tested with different simulated measures and the fil
 
 ![Radar System](/cpp/kalman/figs/randaccx_vxvy_50p.png)
 
-# Conclusions
+# 4 Conclusions
 
-# References
+An exstended kalman filter prototype for filtering data from a radar application has been designed and tested. Prototype performance have been tested with simulated signals of moving object in different situations. The prototype has been codeed in cpp using the Eigen library and tested.
 
-# Appendix A
+The filter has been shown improvements over the measured data in all reported tests, though more simulations and more scenarions need to be tested to properly assess the filter performance.
+
+The observation model law was non linear, which made necessary the usage of the exstended kalman filter. Future possible work could be implementing an uscended kalman kilter to tackle the non linearity and compare performance with the exstended kalman implementation. Also a constant acceleration process model could be implemented instead of a constant velocity one and results could be compared.
+
+# 5 References
+
+# 6 Appendix A
+
+TODO
