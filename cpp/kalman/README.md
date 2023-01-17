@@ -101,21 +101,40 @@ Where **Q** is the process error covariance matrix. It provides and indication o
 
 The designed filter will be tested with different simulated measures and the filtered signal will be compared with the non-filtered one.
 
-# only velx 22 m/s x0=3000 y0=3000 n=100
-(6.743953761836919, 18.67847050290694) --> kalman rmse against truth
-(35.639784238092545, 34.57783895063594) --> meaure no filter rmse against truth
+1. only vel_x=22 m/s - init_position=(x0=3000, y0=3000) - n_iteration=100
 
-# only vely 22 m/s x0=3000 y0=3000 n=100
-(19.706376061088925, 3.9981673069769688) --> kalman rmse against truth
-(43.44241856775875, 35.81681433507567) --> meaure no filter rmse against truth
+![Radar System](/cpp/kalman/figs/onlyvelx_xy_100p.png)
+- Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(6.74, 18.67) 
+- Root Mean Square Error non filtered signal (x_err,y_err)=(35.63, 34.57)
 
-# both velx 12 m/s vely 8 m/s x0=3000 y0=3000 n=50
-(16.62784941084549, 24.243956950332368) --> kalman rmse against truth
-(36.530692004235455, 42.73814882119287) --> meaure no filter rmse against truth
+![Radar System](/cpp/kalman/figs/onlyvelx_vxvy_100p.png)
 
-# accx np.random.rand()*5 vely 5 x0 3000 y0 3000 n=50
-(26.747478897271915, 17.847742212429917) --> kalman rmse against truth
-(33.462418327117206, 35.955291694819856) --> meaure no filter rmse against truth
+
+2. only vel_y=22 m/s - init_position=(x0=3000, y0=3000) - n_iteration=100
+
+![Radar System](/cpp/kalman/figs/onlyvely_xy_100p.png)
+- Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(19.70, 3.99) 
+- Root Mean Square Error non filtered signal (x_err,y_err)=(43.44, 35.81)
+
+![Radar System](/cpp/kalman/figs/onlyvely_vxvy_100p.png)
+
+
+3. both vel vel_x=12 m/s  vel_y= 8 m/s - init_position=(x0=3000, y0=3000) - n_iteration=50
+
+![Radar System](/cpp/kalman/figs/cothvelxy_xy_100p.png)
+- Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(16.62, 24.24) 
+- Root Mean Square Error non filtered signal (x_err,y_err)=(36.53, 42.73)
+
+![Radar System](/cpp/kalman/figs/cothvelxy_xy_50p.png)
+
+
+4. only vel_y=5 m/s with random gaussian acceleration on x with 5m/s of standard deviation - init_position=(x0=3000, y0=3000) - n_iteration=100 
+
+![Radar System](/cpp/kalman/figs/randaccx_xy_50p.png)
+- Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(26.74, 17.84) 
+- Root Mean Square Error non filtered signal (x_err,y_err)=(33.46, 35.95)
+
+![Radar System](/cpp/kalman/figs/randaccx_vxvy_50p.png)
 
 # Conclusions
 
