@@ -11,45 +11,77 @@ struct triangle_phis {
     double phi2{0};
 };
 
-/* */
+/*
+    @param p 
+    @return phase of the point in [0,2PI] range
+*/
 double get_phi(point &p);
 
-/* */
-std::vector<point> get_rand_circ_points(int n, double r);
+/*
+    Get random points belonging to a circonference of radius r and origin (0,0)
 
-/* */
+    @param n number of points to output
+    @param r radius of circonference
+    @param seed seed for random generation
+    @return vector of points
+
+*/
+std::vector<point> get_rand_circ_points(int n, double r, int seed);
+
+/* 
+    Given the phase of a point belonging to a circonference, compute the phases of 
+    all points that with it construct an equilater
+
+    @param phi0 phase of one point
+    @return phases of the three points belonging to the equilater triangle in [0,2PI] range
+    @note given a circonference an equilater triangle is the triangle with greatest perimeter
+*/
 triangle_phis get_equilater_tr_phis(double phi0);
 
-/* */
+/* 
+    Find the nearest point to phi in phis vector, points are assumed to belong to a circonference
+
+    @param phis vector of phases belonging to points on a circonference
+    @param phi
+    @return index of nearest point to phi in phis
+*/
 int get_closest_phi(std::vector<double> &phis, double phi);
 
-/* */
+/*
+    Compute euclidean distance btw two points
+*/
 double distance(point &p1, point &p2);
 
-/* */
+/*
+    Get perimete of a triangle
+*/
 double get_perimeter(triangle &t);
 
-/* */
+/*
+    Print the coordinates (x,y) of each point belonging to a triangle
+*/
 void print_triangle_points(triangle &tr);
 
-/* ------------->  MAIN FUNCTION */
+/* ------------->  MAIN  */
  int main()
 {   
     // get random points belonging to a circonference of radius r and center in the origin (0,0)
     int n_points = 20;
     double radius = 2.0;
-    std::vector<point> points = get_rand_circ_points(n_points, radius);
+    std::vector<point> points = get_rand_circ_points(n_points, radius, 1);
 
-    /* Algorithim Start */
-    // store algorithm resulting triangle with greatest perimeter and its perimeter
-    double temp_perimeter;
+    /* Algorithims Start */
+    // store variable for resulting triangle with greatest perimeter and its perimeter
     double max_perimeter;
-    triangle temp_triangle;
     triangle max_triangle;
 
-    /* --> Use Equilater triangle method -> method1 */
+    double temp_perimeter;
+    triangle temp_triangle;
+
+    /* ------> Use Equilater triangle method -> method1 */
     // construct phases vector from points
     std::vector<double> phis(n_points);
+
     for (int i=0; i<n_points; i++) { 
         phis[i] = get_phi(points[i]);
         }
@@ -70,18 +102,18 @@ void print_triangle_points(triangle &tr);
     }
 
     // method1 results
-    std::cout << "max perimeter: " << max_perimeter << std::endl;
+    std::cout << "Equilater Triangles Method " << std::endl << "perimeter: " << max_perimeter << std::endl;
     print_triangle_points(max_triangle);
 
 
-    /* --> Use combination method -> method2 */
+    /* ------> Use combination method -> method2 */
     Combinations comb;
-    int k = 3;
-    comb.compute(points.data(), points.size(), 0, k); // can i use an iterator? do i have advantages in that?
+    comb.compute(points.data(), points.size());
     std::vector<triangle> tr_combinations = comb.get_combinations();
 
+    // find combination with greatest perimeter
     max_perimeter = 0;
-    for (auto  tr : tr_combinations) {
+    for (auto&  tr : tr_combinations) {
         temp_perimeter = get_perimeter(tr);
 
         if (temp_perimeter > max_perimeter) {
@@ -91,11 +123,13 @@ void print_triangle_points(triangle &tr);
     }
 
     // method2 results
-    std::cout << "max perimeter: " << max_perimeter << std::endl;
+    std::cout << std::endl;
+    std::cout << "Find Combinations Method " << std::endl << "perimeter: "  << max_perimeter << std::endl;
     print_triangle_points(max_triangle);
 
     return 0; 
 }
+
 
 
 double get_phi(point &p) {
@@ -111,8 +145,8 @@ double get_phi(point &p) {
     return phi;
 };
 
-std::vector<point> get_rand_circ_points(int n, double r) {
-    std::srand(1);
+std::vector<point> get_rand_circ_points(int n, double r, int seed) {
+    std::srand(seed);
     std::vector<point> points(n);
 
     double phi;
