@@ -165,10 +165,12 @@ std::vector<point> get_rand_circ_points(int n, double r, int seed) {
 
 triangle_phis get_equilater_tr_phis(double phi0) {
     // phase shift by 120 degrees anti clock wise
-    double phi_left = phi0 + 2.0/3.0 * PI; 
-    phi_left = (phi_left < 0) ? phi_left + 2*PI : phi_left;
+    double phi_left = phi0 + 2.0/3.0 * PI;
     // phase shift by 120 degrees clock wise
     double phi_right = phi0 - 2.0/3.0 * PI;
+    
+    // to get a phase in [0,2PI] range
+    phi_left = (phi_left < 0) ? phi_left + 2*PI : phi_left;
     phi_right = (phi_right < 0) ? phi_right + 2*PI : phi_right;
 
     return triangle_phis{phi0, phi_left, phi_right};
