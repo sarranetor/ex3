@@ -1,4 +1,4 @@
-# Greatest Perimeter Triangle
+# Greatest Triangle Perimeter in Circonference 
 
 ## Problem 
 
@@ -35,5 +35,7 @@ It has been concluded by the author that method1 and method2 lead to the same re
 
 
 ![preview image](figs/fig1.png)
+
+
 Fig1: in the figure there is an example of resulting triangles with 5 randon sampled points from a circonference. The triangle in blue is computed through method 1 and triangle in red through method 2. *Note: triangles lines are overlapping.* 
 
