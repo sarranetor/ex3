@@ -64,7 +64,7 @@ $z_k = [radius, azimuth, velocity]$
 
 $z_k = h(x_k) + v_k$ where $z_k$ is the measure at time k, $x_k$ is the state at time k, $v_k$ is the measurement error, it is assumed gaussian.
 
-$radius = h_r(x_k) = (\sqrt(x^2 + y^2)$
+$radius = h_r(x_k) = \sqrt(x^2 + y^2)$
 
 $azimuth = h_a(x_k) = arctan(y/x)$
 
@@ -81,12 +81,14 @@ The relation is non linear thus the **Exstended** kalman filter needs to be used
 Algorithm:
 
 - Presiction Step:
-    1. Given $x^- [k-1]$state estimation and given $P^- [k-1]$ error covariance matrix estimation at time k-1
+  
+    1. Given $x^- [k-1]$ state estimation and given $P^- [k-1]$ error covariance matrix estimation at time k-1
     2. Project state ahead $x[k] = A  x[k-1]$
     3. Project error covariance ahead $P[k] = A  P^-[k-1] A^T + Q$
   
 
 -  Update Step: 
+  
    1. Update $H_k$ Jacobian martix according to projected state
    2. Update kalman gains $K_k = P_k H^T_k (H_k P_k H^T_k + R)^-$ $^1$
    3. Update state estimate with $z_k$ measurement at time k: $x^-[k]  = x_k + K_k(z_k - h(x_k))$   
@@ -122,14 +124,14 @@ In all tests the measurement error of our radar system is the following:
 
 xy position                   | xy velocity 
 :-------------------------:|:-------------------------:
-![](/exercises/ekalman_radar/figs/onlyvelx_xy_100p.png)  |  ![](/exercises/ekalman_radar/figs/onlyvelx_vxvy_100p.png)
+![](figs/onlyvelx_xy_100p.png)  |  ![](figs/onlyvelx_vxvy_100p.png)
 
 
 - Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(6.74, 18.67) 
 - Root Mean Square Error non filtered signal (x_err,y_err)=(35.63, 34.57)
 
 
-2. only vel_y=22 m/s - init_position=(x0=3000, y0=3000) - n_iteration=100
+1. only vel_y=22 m/s - init_position=(x0=3000, y0=3000) - n_iteration=100
 
 ![Radar System](/exercises/ekalman_radar/figs/onlyvely_xy_100p.png)
 - Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(19.70, 3.99) 
