@@ -5,8 +5,6 @@
 #include "types.hpp"
 #include "data.hpp"
 #include "radar_ekf.hpp"
-// Should be added to the compiler command instead. It is ok though for the purpose of this demo.
-#include "radar_ekf.cpp" 
 
 /* get measurement noise covariance */
 Matrix33d get_R();
@@ -28,9 +26,9 @@ int main()
   
   // create storage matrix for a posteriori predicted states 
   Eigen::MatrixXd x_out;
-  x_out.resize(4, get_n_measurements());
+  x_out.resize(4, data::get_n_measurements());
   // get measurements
-  Eigen::MatrixXd zk = get_zk();
+  Eigen::MatrixXd zk = data::get_zk();
   // instanciate RadarEKF class with P0, Q, R, dt values
   RadarEKF Ekalman_filter(P0, Q, R, dt);
 
@@ -39,7 +37,7 @@ int main()
   x_out.col(0) = Ekalman_filter.initialize(zk.col(0));
   
   // feed to the filter measurement data sample by sample
-  for (int i=1; i<get_n_measurements(); i++) 
+  for (int i=1; i<data::get_n_measurements(); i++) 
   {
     // a posteriori predicted state at each k step
     x_out.col(i) = Ekalman_filter.predict_xk(zk.col(i));
@@ -47,10 +45,10 @@ int main()
 
   // print filter results for every step k
   std::cout << "Xk states EKFiltering Output: " << std::endl;
-  std::cout << "y: " << x_out(0, Eigen::all) <<std::endl;
-  std::cout << "x: " << x_out(1, Eigen::all) <<std::endl;
-  std::cout << "vy: " << x_out(2, Eigen::all) <<std::endl;
-  std::cout << "vx: " << x_out(3, Eigen::all) <<std::endl;
+  std::cout << "y: " << x_out(0, Eigen::all) << std::endl;
+  std::cout << "x: " << x_out(1, Eigen::all) << std::endl;
+  std::cout << "vy: " << x_out(2, Eigen::all) << std::endl;
+  std::cout << "vx: " << x_out(3, Eigen::all) << std::endl;
 
   return 0;
 }
@@ -58,9 +56,9 @@ int main()
 
 Matrix33d get_R() 
 {
-  double var_r = measure_stdv.radius * measure_stdv.radius;
-  double var_az = measure_stdv.azimuth * measure_stdv.azimuth;
-  double var_vel = measure_stdv.velocity * measure_stdv.velocity;
+  double var_r = std::pow(data::measure_stdv.radius, 2);
+  double var_az = std::pow(data::measure_stdv.azimuth, 2);
+  double var_vel = std::pow(data::measure_stdv.velocity, 2);
 
   Matrix33d R;
   R << var_r, 0, 0,

@@ -5,7 +5,7 @@
 #ifndef DATA_H
 #define DATA_H
 
-#define PI 3.14159265
+namespace data {
 
 struct  {
     const double radius{30}; //m
@@ -57,5 +57,7 @@ Eigen::MatrixXd get_zk() {
 
     return zk;
 };
+
+} // end of namespace data
 
 #endif

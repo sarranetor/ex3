@@ -2,14 +2,7 @@
 #include<vector>
 #include<cmath>
 #include "utils.hpp"
-
-#define PI 3.14159265
-
-struct triangle_phis {
-    double phi0{0};
-    double phi1{0};
-    double phi2{0};
-};
+#include "combinations.hpp"
 
 /*
     @param p 
@@ -17,68 +10,43 @@ struct triangle_phis {
 */
 double get_phi(const point &p);
 
-/*
-    Get random points belonging to a circonference of radius r and origin (0,0)
-
-    @param n number of points to output
-    @param r radius of circonference
-    @param seed seed for random generation
-    @return vector of points
-
-*/
-std::vector<point> get_rand_circ_points(int n, double r, int seed);
-
 /* 
-    Given the phase of a point belonging to a circonference, compute the phases of 
+    Given the phase of a point belonging to a circumference, compute the phases of 
     all points that with it construct an equilater
 
     @param phi0 phase of one point
     @return phases of the three points belonging to the equilater triangle in [0,2PI] range
-    @note given a circonference an equilater triangle is the triangle with greatest perimeter
+    @note given a circumference an equilater triangle is the triangle with greatest perimeter
 */
 triangle_phis get_equilater_tr_phis(double phi0);
 
 /* 
-    Find the nearest point to phi in phis vector, points are assumed to belong to a circonference
+    Find the nearest point to phi in phis vector, points are assumed to belong to a circumference
 
-    @param phis vector of phases belonging to points on a circonference
+    @param phis vector of phases belonging to points on a circumference
     @param phi
     @return index of nearest point to phi in phis
 */
 int get_closest_phi(const std::vector<double> &phis, double phi);
 
-/*
-    Compute euclidean distance btw two points
-*/
-double distance(const point &p1, const point &p2);
 
-/*
-    Get perimete of a triangle
-*/
-double get_perimeter(const triangle &t);
-
-/*
-    Print the coordinates (x,y) of each point belonging to a triangle
-*/
-void print_triangle_points(const triangle &tr);
-
-/* ------------->  MAIN  */
  int main()
 {   
-    // get random points belonging to a circonference of radius r and center in the origin (0,0)
+    // get random points belonging to a circumference of radius r and center in the origin (0,0)
     int n_points = 20;
     double radius = 2.0;
     std::vector<point> points = get_rand_circ_points(n_points, radius, 1);
 
     /* Algorithims Start */
-    // store variable for resulting triangle with greatest perimeter and its perimeter
-    double max_perimeter;
-    triangle max_triangle;
 
-    double temp_perimeter;
+    double temp_perimeter(0);
     triangle temp_triangle;
 
     /* ------> Use Equilater triangle method -> method1 */
+    // store variable for resulting triangle with greatest perimeter and its perimeter
+    double max_perimeter_m1(0);
+    triangle max_triangle_m1;
+
     // construct phases vector from points
     std::vector<double> phis(n_points);
 
@@ -95,37 +63,41 @@ void print_triangle_points(const triangle &tr);
         temp_triangle = {points.at(i), points.at(index1), points.at(index2)};
         temp_perimeter = get_perimeter(temp_triangle);
 
-        if (temp_perimeter > max_perimeter) {
-            max_perimeter = temp_perimeter;
-            max_triangle = temp_triangle;
+        // ..
+        if (temp_perimeter > max_perimeter_m1) {
+            max_perimeter_m1 = temp_perimeter;
+            max_triangle_m1 = temp_triangle;
         }
     }
 
     // method1 results
-    std::cout << "Equilater Triangles Method " << std::endl << "perimeter: " << max_perimeter << std::endl;
-    print_triangle_points(max_triangle);
+    std::cout << "Equilater Triangles Method " << std::endl << "perimeter: " << max_perimeter_m1 << std::endl;
+    print_triangle_points(max_triangle_m1);
 
 
     /* ------> Use combination method -> method2 */
+    double max_perimeter_m2(0);
+    triangle max_triangle_m2;
+
     Combinations comb;
     comb.compute(points.data(), points.size());
     std::vector<triangle> tr_combinations = comb.get_combinations();
 
     // find combination with greatest perimeter
-    max_perimeter = 0;
     for (auto&  tr : tr_combinations) {
         temp_perimeter = get_perimeter(tr);
 
-        if (temp_perimeter > max_perimeter) {
-            max_perimeter = temp_perimeter;
-            max_triangle = tr;
+        // ..
+        if (temp_perimeter > max_perimeter_m2) {
+            max_perimeter_m2 = temp_perimeter;
+            max_triangle_m2 = tr;
         }
     }
 
     // method2 results
     std::cout << std::endl;
-    std::cout << "Find Combinations Method " << std::endl << "perimeter: "  << max_perimeter << std::endl;
-    print_triangle_points(max_triangle);
+    std::cout << "Find Combinations Method " << std::endl << "perimeter: "  << max_perimeter_m2 << std::endl;
+    print_triangle_points(max_triangle_m2);
 
     return 0; 
 }
@@ -143,24 +115,6 @@ double get_phi(const point &p) {
         phi = phi + 2*PI;
 
     return phi;
-};
-
-std::vector<point> get_rand_circ_points(int n, double r, int seed) {
-    std::srand(seed);
-    std::vector<point> points(n);
-
-    double phi;
-    int n_rand;
-    for (int i=0; i<n; i++) {
-        n_rand = std::rand();
-        // generate random angle from 0 to 2*PI
-        phi = (n_rand / static_cast<double>(RAND_MAX)) * 2.0 * PI;
-
-        points[i].x = r * std::cos(phi);
-        points[i].y = r * std::sin(phi);
-    }
-
-    return points;
 };
 
 triangle_phis get_equilater_tr_phis(double phi0) {
@@ -201,20 +155,4 @@ int get_closest_phi(const std::vector<double> &phis, double phi) {
     }  
 
     return index;
-};
-
-double distance(const point &p1, const point &p2) {
-    double dy = p1.y - p2.y;
-    double dx = p1.x - p2.x;
-    return std::sqrt(dx*dx + dy*dy);
-};
-
-double get_perimeter(const triangle &t) {
-    return distance(t.p1, t.p2) + distance(t.p2, t.p3) + distance(t.p3, t.p1);
-};
-
-void print_triangle_points(const triangle &tr) {
-    std::cout << "points: (" << tr.p1.x << "," << tr.p1.y << ")  ("
-                << tr.p2.x << "," << tr.p2.y << ")  ("
-                << tr.p3.x << "," << tr.p3.y << ")" << std::endl;
 };
