@@ -127,35 +127,39 @@ xy position                   | xy velocity
 ![](figs/onlyvelx_xy_100p.png)  |  ![](figs/onlyvelx_vxvy_100p.png)
 
 
-- Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(6.74, 18.67) 
-- Root Mean Square Error non filtered signal (x_err,y_err)=(35.63, 34.57)
+- Position Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(6.74, 18.67) 
+- Position Root Mean Square Error non filtered signal (x_err,y_err)=(35.63, 34.57)
 
 
 1. only vel_y=22 m/s - init_position=(x0=3000, y0=3000) - n_iteration=100
 
-![Radar System](/exercises/ekalman_radar/figs/onlyvely_xy_100p.png)
-- Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(19.70, 3.99) 
-- Root Mean Square Error non filtered signal (x_err,y_err)=(43.44, 35.81)
+xy position                   | xy velocity 
+:-------------------------:|:-------------------------:
+![](figs/onlyvely_xy_100p.png)  |  ![](figs/onlyvely_vxvy_100p.png)
 
-![Radar System](/exercises/ekalman_radar/figs/onlyvely_vxvy_100p.png)
+- Position Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(19.70, 3.99) 
+- Position Root Mean Square Error non filtered signal (x_err,y_err)=(43.44, 35.81)
 
 
-3. both vel vel_x=12 m/s  vel_y= 8 m/s - init_position=(x0=3000, y0=3000) - n_iteration=50
+1. both vel vel_x=12 m/s  vel_y= 8 m/s - init_position=(x0=3000, y0=3000) - n_iteration=50
 
-![Radar System](/exercises/ekalman_radar/figs/cothvelxy_xy_100p.png)
+xy position                   | xy velocity 
+:-------------------------:|:-------------------------:
+![](figs/cothvelxy_xy_100p.png)  |  ![](figs/cothvelxy_xy_50p.png)
+
 - Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(16.62, 24.24) 
 - Root Mean Square Error non filtered signal (x_err,y_err)=(36.53, 42.73)
 
-![Radar System](/exercises/ekalman_radar/figs/cothvelxy_xy_50p.png)
 
+1. only vel_y=5 m/s with random gaussian acceleration on x with 5m/s of standard deviation - init_position=(x0=3000, y0=3000) - n_iteration=100 
 
-4. only vel_y=5 m/s with random gaussian acceleration on x with 5m/s of standard deviation - init_position=(x0=3000, y0=3000) - n_iteration=100 
+xy position                   | xy velocity 
+:-------------------------:|:-------------------------:
+![](figs/randaccx_xy_50p.png)  |  ![](figs/randaccx_vxvy_50p.png)
 
-![Radar System](/exercises/ekalman_radar/figs/randaccx_xy_50p.png)
 - Root Mean Square Error Kalman Filtered signal (x_err,y_err)=(26.74, 17.84) 
 - Root Mean Square Error non filtered signal (x_err,y_err)=(33.46, 35.95)
 
-![Radar System](/exercises/ekalman_radar/figs/randaccx_vxvy_50p.png)
 
 # 4 Conclusions
 
