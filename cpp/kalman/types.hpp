@@ -1,4 +1,5 @@
-#include "Eigen/Dense"
+//#include "Eigen/Dense"
+#include "../../eigen/Eigen/Dense"
 
 #define PI 3.14159265
  

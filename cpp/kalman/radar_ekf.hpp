@@ -1,5 +1,5 @@
 #include <cmath>
-#include "Eigen/Dense"
+#include "../../eigen/Eigen/Dense"
 #include "types.hpp"
 
 #ifndef RADAR_EKF_H
@@ -76,14 +76,14 @@ class RadarEKF
     @param zk time zero data (radiud in meter, azimith in degree, radial velocity in m/s)
     @return x0 state vector at time zero (y, x, y_vel, x_vel)
   */
-  Matrix41d initialize(Matrix31d &zk);
+  Matrix41d initialize(Matrix31d zk);
 
   /* 
     Compute and predict a posteriori state based on computed Kalman gains for step k
     @param zk measurement data at time k (radiud in meter, azimith in degree, radial velocity in m/s)
     @return xk a posteriori state vector based on computed Kalman gains for step k (y, x, y_vel, x_vel)
   */
-  Matrix41d predict_xk(Matrix31d &zk); 
+  Matrix41d predict_xk(Matrix31d zk); 
 };
 
 #endif

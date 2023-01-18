@@ -3,7 +3,10 @@
 ## Executing progpam
 Eigen library is used for Matrix operations, it is a code dependency. Eigen is a header only library, thus needs only its source files to be copied in code directory to run the program. 
 
-    jhdsjssdskdhskjdh
+    cd ..\..
+    git ..
+    g++ .\main.cpp -o main
+    .\main.exe
 
 ## README Sections
 1. Introducrion
@@ -11,7 +14,6 @@ Eigen library is used for Matrix operations, it is a code dependency. Eigen is a
 3. Results
 4. Conclusions
 5. Reference
-6. Appendix A
 
 # 1 Introduction
 
@@ -32,7 +34,7 @@ This error is assumed to be gaussian with a certain varience: **var_r**,  **var_
 
 # 2 Model Description
 
-To implement the Kalman filter is necessary to work out the process model and the observations model. In **Appendix A** a more in depth description on Kalman theory is provided.
+To implement the Kalman filter is necessary to work out the process model and the observations model. In [2] a more in depth description on Kalman theory and proofs are provided.
 
 ## 2.1 Process Model
 A constant velocity model is assumed. Thus:
@@ -86,9 +88,9 @@ Algorithm:
 
 -  Update Step:
    - Update H_k .. *Exstended part* ..  
-   -  Update kalman gains $K_k = P_k H^t (H P_k H^t + R)^-1$
-   -  Update estimate with $z_k$ measurement at time k: $x^-[k]  = x_k + K_k(z_k - Hx_k)$ 
-   -  Update error covariance matrix $P^-[k]=(I - K_k H) P_k$
+   - Update kalman gains $K_k = P_k H^t (H P_k H^t + R)^-1$
+   - Update estimate with $z_k$ measurement at time k: $x^-[k]  = x_k + K_k(z_k - Hx_k)$ 
+   - Update error covariance matrix $P^-[k]=(I - K_k H) P_k$
 
 
 Where **R** is the measurement noise covariance matrix, usually measured prior the operation of the filter and dependent on the measurement system error. In this case the measurement error of our radar system, thus R is set to:
@@ -163,7 +165,3 @@ The observation model law was non linear, which made necessary the usage of the 
 [2]: https://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf
 [3]: https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
 [4]: https://thekalmanfilter.com/
-
-# 6 Appendix A
-
-TODO

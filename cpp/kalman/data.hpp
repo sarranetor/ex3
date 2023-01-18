@@ -1,5 +1,5 @@
 #include <vector>
-#include "Eigen/Dense"
+#include "../../eigen/Eigen/Dense"
 #include "types.hpp"
 
 #ifndef DATA_H

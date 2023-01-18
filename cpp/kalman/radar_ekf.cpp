@@ -25,7 +25,7 @@ RadarEKF::RadarEKF(Matrix44d &P, Matrix44d &Q, Matrix33d &R, double dt)
   _R = R;     
 };
 
-Matrix41d RadarEKF::initialize(Matrix31d &zk) 
+Matrix41d RadarEKF::initialize(Matrix31d zk) 
 {
   double r = zk(0);
   double azimuth = zk(1);
@@ -42,7 +42,7 @@ Matrix41d RadarEKF::initialize(Matrix31d &zk)
   return _xk;
 };
 
-Matrix41d RadarEKF::predict_xk(Matrix31d &zk) 
+Matrix41d RadarEKF::predict_xk(Matrix31d zk) 
 {
   /* Time Update/Predict */
   // project the state ahead
