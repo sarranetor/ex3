@@ -6,10 +6,12 @@
 #define RADAR_EKF_H
 
 /* 
-   RadarEKF is a class for applying Exstended Kalman Filter to Radar data.
-   It is assumed that the radar measures radius (radial distance to the object), 
-   azimith angle and velocity in radial direction. 
-   ... state desctiption data desctiprion ..
+  RadarEKF is a class for applying Exstended Kalman Filter to Radar data.
+  It is assumed that the radar measures radius r (radial distance to the object), 
+  azimith az angle and velocity vel in radial direction. 
+   
+  - meaure vector zk = [r, az, vel] in [m , degree, m/s] units
+  - state vector xk = [y, x, y_vel, x_vel] in [m, m, m/s, m/s] units
 */
 class RadarEKF 
 {

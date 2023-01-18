@@ -73,9 +73,9 @@ Matrix33d get_R()
 Matrix44d get_Q() 
 {
   Matrix44d Q;
-  Q << 20, 0, 0, 0, // hp ..
+  Q << 20, 0, 0, 0, // hp 4.5 m std
        0, 20, 0, 0,
-       0, 0, 4, 0, // hp ..
+       0, 0, 4, 0, // hp 2 m/s std
        0, 0, 0, 4; 
 
   return Q;

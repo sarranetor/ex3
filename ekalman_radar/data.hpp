@@ -13,7 +13,7 @@ struct  {
     double velocity{1}; //m/s
 } measure_stdv;
 
-/* .. */
+/* data from object with const vel=(vel_x=22 m/s, vel_y=0 m/s) - init_position=(x0=3000 m, y0=3000 m) - n_iteration=30 */
 std::vector<double> radius_measurement{4253.595724013049, 4342.068802974521, 4233.9360615137675, 4326.122630637821,
                              4314.813736298536, 4291.696443774744, 4386.953317943045, 4373.898542038088, 4368.300202072035,
                              4375.828318198833, 4417.793112804298, 4437.082112656981, 4413.619851092478, 4455.409912489576, 
@@ -33,13 +33,16 @@ std::vector<double> velocity_measurement{20.21335251225024, 22.233628310848825, 
                             24.11172097535575, 21.2591283134228, 22.827589405934013, 21.065122814474073, 22.651845721102696, 20.65469277258423, 
                             21.933699936033594, 23.26809347577007};
 
-// ..
+/* Get number of radar data acording to radius_measurement global vector size */
 int get_n_measurements() {
     int n = radius_measurement.size();
     return n;
 };
 
-// ..
+/*
+    Pack radius_measurement, azimith_measurement and velocity_measurement in zk matrix with (3, n_measurements) size.
+    @ return zk
+*/
 Eigen::MatrixXd get_zk() {
     int n = radius_measurement.size();
     
