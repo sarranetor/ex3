@@ -15,7 +15,7 @@ struct triangle_phis {
     @param p 
     @return phase of the point in [0,2PI] range
 */
-double get_phi(point &p);
+double get_phi(const point &p);
 
 /*
     Get random points belonging to a circonference of radius r and origin (0,0)
@@ -45,22 +45,22 @@ triangle_phis get_equilater_tr_phis(double phi0);
     @param phi
     @return index of nearest point to phi in phis
 */
-int get_closest_phi(std::vector<double> &phis, double phi);
+int get_closest_phi(const std::vector<double> &phis, double phi);
 
 /*
     Compute euclidean distance btw two points
 */
-double distance(point &p1, point &p2);
+double distance(const point &p1, const point &p2);
 
 /*
     Get perimete of a triangle
 */
-double get_perimeter(triangle &t);
+double get_perimeter(const triangle &t);
 
 /*
     Print the coordinates (x,y) of each point belonging to a triangle
 */
-void print_triangle_points(triangle &tr);
+void print_triangle_points(const triangle &tr);
 
 /* ------------->  MAIN  */
  int main()
@@ -132,7 +132,7 @@ void print_triangle_points(triangle &tr);
 
 
 
-double get_phi(point &p) {
+double get_phi(const point &p) {
     double phi = std::atan(p.y / p.x);
 
     if (p.x < 0 && p.y > 0)
@@ -176,7 +176,7 @@ triangle_phis get_equilater_tr_phis(double phi0) {
     return triangle_phis{phi0, phi_left, phi_right};
 };
 
-int get_closest_phi(std::vector<double> &phis, double phi) {
+int get_closest_phi(const std::vector<double> &phis, double phi) {
     int n = phis.size();
     double diff1(0);
     // diff2 is used to correctly compute the distance in rad
@@ -203,17 +203,17 @@ int get_closest_phi(std::vector<double> &phis, double phi) {
     return index;
 };
 
-double distance(point &p1, point &p2) {
+double distance(const point &p1, const point &p2) {
     double dy = p1.y - p2.y;
     double dx = p1.x - p2.x;
     return std::sqrt(dx*dx + dy*dy);
 };
 
-double get_perimeter(triangle &t) {
+double get_perimeter(const triangle &t) {
     return distance(t.p1, t.p2) + distance(t.p2, t.p3) + distance(t.p3, t.p1);
 };
 
-void print_triangle_points(triangle &tr) {
+void print_triangle_points(const triangle &tr) {
     std::cout << "points: (" << tr.p1.x << "," << tr.p1.y << ")  ("
                 << tr.p2.x << "," << tr.p2.y << ")  ("
                 << tr.p3.x << "," << tr.p3.y << ")" << std::endl;

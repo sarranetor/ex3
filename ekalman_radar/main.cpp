@@ -36,13 +36,13 @@ int main()
 
   /* Start Filtering Signal */
   // first measure is needed to initialize the filter
-  x_out(Eigen::all, 0) = Ekalman_filter.initialize(zk(Eigen::all, 0)); // lvalur.. can i accept a ref in input to initialize
+  x_out.col(0) = Ekalman_filter.initialize(zk.col(0));
   
   // feed to the filter measurement data sample by sample
   for (int i=1; i<get_n_measurements(); i++) 
   {
     // a posteriori predicted state at each k step
-    x_out(Eigen::all, i) = Ekalman_filter.predict_xk(zk(Eigen::all, i));
+    x_out.col(i) = Ekalman_filter.predict_xk(zk.col(i));
   }
 
   // print filter results for every step k

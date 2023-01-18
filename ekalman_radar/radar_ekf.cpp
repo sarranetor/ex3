@@ -17,7 +17,7 @@ RadarEKF::RadarEKF(double dt)
   _K.setZero(4, 3);
 };
 
-RadarEKF::RadarEKF(Matrix44d &P, Matrix44d &Q, Matrix33d &R, double dt)
+RadarEKF::RadarEKF(const Matrix44d &P, const Matrix44d &Q, const Matrix33d &R, double dt)
   : RadarEKF(dt) 
 { 
   _Pk = P; 
@@ -25,7 +25,7 @@ RadarEKF::RadarEKF(Matrix44d &P, Matrix44d &Q, Matrix33d &R, double dt)
   _R = R;     
 };
 
-Matrix41d RadarEKF::initialize(Matrix31d zk) 
+Matrix41d RadarEKF::initialize(const Matrix31d &zk) 
 {
   double r = zk(0);
   double azimuth = zk(1);
@@ -42,7 +42,7 @@ Matrix41d RadarEKF::initialize(Matrix31d zk)
   return _xk;
 };
 
-Matrix41d RadarEKF::predict_xk(Matrix31d zk) 
+Matrix41d RadarEKF::predict_xk(const Matrix31d &zk) 
 {
   /* Time Update/Predict */
   // project the state ahead
@@ -90,7 +90,7 @@ void RadarEKF::_update_H()
   _Hk(2,3) = x_vel / std::sqrt(y_vel*y_vel + x_vel*x_vel);
 };
 
-Matrix31d RadarEKF::_h(Matrix41d &xk) 
+Matrix31d RadarEKF::_h(const Matrix41d &xk) 
 {
   double y = xk(0,0);
   double x = xk(1,0);

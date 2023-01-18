@@ -49,7 +49,7 @@ class RadarEKF
     @param xk 
     @return zk computed
   */
-  Matrix31d _h(Matrix41d &xk);
+  Matrix31d _h(const Matrix41d &xk);
 
 
   public:
@@ -67,7 +67,7 @@ class RadarEKF
     @param R
     @param dt in seconds
   */
-  RadarEKF(Matrix44d &P, Matrix44d &Q, Matrix33d &R, double dt); 
+  RadarEKF(const Matrix44d &P, const Matrix44d &Q, const Matrix33d &R, double dt); 
 
   // void set_p(Matrix44d P);
   // void set_q(Matrix44d Q);
@@ -78,14 +78,14 @@ class RadarEKF
     @param zk time zero data (radiud in meter, azimith in degree, radial velocity in m/s)
     @return x0 state vector at time zero (y, x, y_vel, x_vel)
   */
-  Matrix41d initialize(Matrix31d zk);
+  Matrix41d initialize(const Matrix31d &zk);
 
   /* 
     Compute and predict a posteriori state based on computed Kalman gains for step k
     @param zk measurement data at time k (radiud in meter, azimith in degree, radial velocity in m/s)
     @return xk a posteriori state vector based on computed Kalman gains for step k (y, x, y_vel, x_vel)
   */
-  Matrix41d predict_xk(Matrix31d zk); 
+  Matrix41d predict_xk(const Matrix31d &zk); 
 };
 
 #endif

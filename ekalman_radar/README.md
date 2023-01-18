@@ -133,7 +133,7 @@ xy position                   | xy velocity
 - Position Root Mean Square Error non filtered signal (x_err,y_err)=(35.63, 34.57)
 
 
-1. only vel_y=22 m/s - init_position=(x0=3000, y0=3000) - n_iteration=100
+2. only vel_y=22 m/s - init_position=(x0=3000, y0=3000) - n_iteration=100
 
 xy position                   | xy velocity 
 :-------------------------:|:-------------------------:
@@ -143,7 +143,7 @@ xy position                   | xy velocity
 - Position Root Mean Square Error non filtered signal (x_err,y_err)=(43.44, 35.81)
 
 
-1. both vel vel_x=12 m/s  vel_y= 8 m/s - init_position=(x0=3000, y0=3000) - n_iteration=50
+3. both vel vel_x=12 m/s  vel_y= 8 m/s - init_position=(x0=3000, y0=3000) - n_iteration=50
 
 xy position                   | xy velocity 
 :-------------------------:|:-------------------------:
@@ -153,7 +153,7 @@ xy position                   | xy velocity
 - Root Mean Square Error non filtered signal (x_err,y_err)=(36.53, 42.73)
 
 
-1. only vel_y=5 m/s with random gaussian acceleration on x with 5m/s of standard deviation - init_position=(x0=3000, y0=3000) - n_iteration=100 
+4. only vel_y=5 m/s with random gaussian acceleration on x with 5m/s of standard deviation - init_position=(x0=3000, y0=3000) - n_iteration=100 
 
 xy position                   | xy velocity 
 :-------------------------:|:-------------------------:
