@@ -4,6 +4,7 @@
 Eigen library is used for Matrix operations, it is a code dependency. Eigen is a header only library, thus needs only its source files to be copied. Eigen it has been added to this repo as a git submodule. The program can be run as follows:
 
     cd ..\exercises\ekalman_radar
+    git clone --recurse-submodules https://github.com/sarranetor/eigen.git
     git submodule update --init --recursive
     g++ .\main.cpp -o <name>
     .\<name>.exe
