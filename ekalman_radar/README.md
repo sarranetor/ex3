@@ -22,11 +22,12 @@ Compute position (x,y) and velocity (x_vel, y_vel) of an object in motion thanks
 ## 1.1 Radar System
 
 Radar System:
-![Radar System](/exercises/ekalman_radar/figs/fig1.png)
+![Radar System](figs/fig1.png)
 Radar measurement output each T time:
 - Radius r (meter): distance in meter between the radar and the object. Computed thanks the time to arrival.
 - Azimuth az (degree): angle between the object and the radar internal x axes.
-- Velocity v (m/s): velocity of the object in the radial direction computed thanks to dopler effect.  
+- Velocity v (m/s): velocity of the object in the radial direction computed thanks to doopler effect.  
+- T sampling time = 1 second
 
 The signals coming from the radar are assumed to have a certain error compared to the true radius, azimuth and velocity. 
 

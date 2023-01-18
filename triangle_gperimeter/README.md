@@ -9,7 +9,7 @@ No dependencies except the standard library.
 
 ## Problem 
 
-Given n random points sampled from a circumference fing the group that construct the triangle with the greatest perimeter.
+Given n random points sampled from a circumference find the group that construct the triangle with the greatest perimeter.
 
 ## Solutions 
 
