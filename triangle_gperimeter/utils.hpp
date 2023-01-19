@@ -34,7 +34,7 @@ struct triangle_phis {
     @return vector of points
 
 */
-std::vector<point> get_rand_circ_points(int n, double r, int seed) {
+std::vector<point> get_rand_circ_points(const int n, const double r, const int seed) {
     std::srand(seed);
     std::vector<point> points(n);
 

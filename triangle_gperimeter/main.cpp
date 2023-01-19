@@ -49,21 +49,26 @@ int get_closest_phi(const std::vector<double> &phis, double phi);
 
     // construct phases vector from points
     std::vector<double> phis(n_points);
-
     for (int i=0; i<n_points; i++) { 
         phis[i] = get_phi(points[i]);
         }
 
+    // iterate through points constructing for each point p1 the triangle with the other
+    // points p2 and p3 that are the nearest to the equilater triangle (constructer with  p1) points
+    // Note: points are expressed in polar coordinates through the phase in [0, 2PI] range
+    triangle_phis eq_tr_phis;
     for (int i=0; i<n_points; i++) {
-        triangle_phis tr_phis = get_equilater_tr_phis(phis.at(i));
+        // get points of the equilater triangle that has point pi
+        eq_tr_phis = get_equilater_tr_phis(phis.at(i));
 
-        int index1 = get_closest_phi(phis, tr_phis.phi1);
-        int index2 = get_closest_phi(phis, tr_phis.phi2);
+        int index1 = get_closest_phi(phis, eq_tr_phis.phi1);
+        int index2 = get_closest_phi(phis, eq_tr_phis.phi2);
 
+        // construct greatest possible triangle given point pi and set of random points P 
         temp_triangle = {points.at(i), points.at(index1), points.at(index2)};
         temp_perimeter = get_perimeter(temp_triangle);
 
-        // ..
+        // store greatest 
         if (temp_perimeter > max_perimeter_m1) {
             max_perimeter_m1 = temp_perimeter;
             max_triangle_m1 = temp_triangle;
@@ -87,7 +92,7 @@ int get_closest_phi(const std::vector<double> &phis, double phi);
     for (auto&  tr : tr_combinations) {
         temp_perimeter = get_perimeter(tr);
 
-        // ..
+        // store greatest 
         if (temp_perimeter > max_perimeter_m2) {
             max_perimeter_m2 = temp_perimeter;
             max_triangle_m2 = tr;
@@ -101,7 +106,6 @@ int get_closest_phi(const std::vector<double> &phis, double phi);
 
     return 0; 
 }
-
 
 
 double get_phi(const point &p) {

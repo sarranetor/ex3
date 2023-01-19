@@ -57,7 +57,7 @@ class RadarEKF
     RadarEKF constructor
     @param dt in seconds
   */
-  RadarEKF(double dt);
+  RadarEKF(const double dt);
 
   /*
     RadarEKF constructor
@@ -66,19 +66,19 @@ class RadarEKF
     @param R
     @param dt in seconds
   */
-  RadarEKF(const Matrix44d &P, const Matrix44d &Q, const Matrix33d &R, double dt); 
+  RadarEKF(const Matrix44d &P, const Matrix44d &Q, const Matrix33d &R, const double dt); 
 
   /* Default destructor */
   ~RadarEKF() = default;
 
   /* Set error covariance matrix P */
-  void set_p(Matrix44d &P);
+  void set_p(const Matrix44d &P);
 
   /* Set process noise covariance matrix Q */
-  void set_q(Matrix44d &Q);
+  void set_q(const Matrix44d &Q);
 
   /* Set measurement noise covariance matrix R */
-  void set_r(Matrix33d &R);
+  void set_r(const Matrix33d &R);
 
   /* 
     Initialize state matrix fot time zero measurement data
@@ -95,7 +95,7 @@ class RadarEKF
   Matrix41d predict_xk(const Matrix31d &zk); 
 };
 
-RadarEKF::RadarEKF(double dt) 
+RadarEKF::RadarEKF(const double dt) 
 { 
   _dt = dt;
 
@@ -111,7 +111,7 @@ RadarEKF::RadarEKF(double dt)
   _K.setZero(4, 3);
 };
 
-RadarEKF::RadarEKF(const Matrix44d &P, const Matrix44d &Q, const Matrix33d &R, double dt)
+RadarEKF::RadarEKF(const Matrix44d &P, const Matrix44d &Q, const Matrix33d &R, const double dt)
   : RadarEKF(dt) 
 { 
   _Pk = P; 
@@ -119,15 +119,15 @@ RadarEKF::RadarEKF(const Matrix44d &P, const Matrix44d &Q, const Matrix33d &R, d
   _R = R;     
 };
 
-void RadarEKF::set_p(Matrix44d &P) { 
+void RadarEKF::set_p(const Matrix44d &P) { 
   _Pk = P;    
 };
 
-void RadarEKF::set_q(Matrix44d &Q) { 
+void RadarEKF::set_q(const Matrix44d &Q) { 
   _Q = Q;    
 };
 
-void RadarEKF::set_r(Matrix33d &R) { 
+void RadarEKF::set_r(const Matrix33d &R) { 
   _R = R;     
 };
 
