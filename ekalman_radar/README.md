@@ -3,9 +3,10 @@
 ## Executing program
 Eigen library is used for Matrix operations, it is a code dependency. Eigen is a header only library, thus needs only its source files to be copied. Eigen it has been added to this repo as a git submodule. The program can be run as follows:
 
-    cd ..\exercises\ekalman_radar
+    cd ..\exercises
     git clone --recurse-submodules https://github.com/sarranetor/eigen.git
     git submodule update --init --recursive
+    cd ..\exercises\ekalman_radar
     g++ .\main.cpp -o <name>
     .\<name>.exe
 
@@ -82,7 +83,7 @@ The relation is non linear thus the **Exstended** kalman filter needs to be used
 
 Algorithm:
 
-- Presiction Step:
+- Prediction Step:
   
     1. Given $x^- [k-1]$ state estimation and given $P^- [k-1]$ error covariance matrix estimation at time k-1
     2. Project state ahead $x[k] = A  x[k-1]$

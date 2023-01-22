@@ -45,10 +45,10 @@ int main()
 
   // print filter results for every step k
   std::cout << "Xk states EKFiltering Output: " << std::endl;
-  std::cout << "y: " << x_out(0, Eigen::all) << std::endl;
-  std::cout << "x: " << x_out(1, Eigen::all) << std::endl;
-  std::cout << "vy: " << x_out(2, Eigen::all) << std::endl;
-  std::cout << "vx: " << x_out(3, Eigen::all) << std::endl;
+  std::cout << "y [m]: " << x_out(0, Eigen::all) << std::endl;
+  std::cout << "x [m]: " << x_out(1, Eigen::all) << std::endl;
+  std::cout << "vy [m/s]: " << x_out(2, Eigen::all) << std::endl;
+  std::cout << "vx [m/s]: " << x_out(3, Eigen::all) << std::endl;
 
   return 0;
 }
