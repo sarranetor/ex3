@@ -32,7 +32,7 @@ Radar measurement output each T time:
 
 The signals coming from the radar are assumed to have a certain error compared to the true radius, azimuth and velocity. 
 
-This error is assumed to be gaussian with varience: **var_r**,  **var_az**,  **var_vel**.
+This error is assumed to be gaussian with zero mean and varience: **var_r**,  **var_az**,  **var_vel**.
 
 # 2 Model Description
 
@@ -165,11 +165,11 @@ xy position                   | xy velocity
 
 # 4 Conclusions
 
-An exstended kalman filter prototype for filtering data from a radar application has been designed and tested. Prototype performance have been tested with simulated signals of moving object in different situations. The prototype has been codeed in cpp using the Eigen library and tested.
+An exstended kalman filter prototype for filtering data from a radar application has been designed and tested. Prototype performance have been tested with simulated signals of objects moving in different situations. The prototype has been codeed in cpp using the Eigen library and tested.
 
-The filter has been shown improvements over the measured data in all reported tests, though more simulations and more scenarions need to be tested to properly assess the filter performance.
+The filter has shown improvements over the measured data in all reported tests. Although more simulations and more scenarions need to be tested to properly assess the filter performance.
 
-The observation model law was non linear, which made necessary the usage of the exstended kalman filter. Future possible work could be implementing an uscended kalman kilter to tackle the non linearity and compare performance with the exstended kalman implementation. Also a constant acceleration process model could be implemented instead of a constant velocity one and results could be compared.
+The observation model law is non linear, which made necessary the usage of the exstended kalman filter. Future possible work could be implementing an uscended kalman kilter to tackle the non linearity and compare performance with the exstended kalman implementation. Also a constant acceleration process model could be implemented instead of a constant velocity one and results could be compared.
 
 # 5 References
 

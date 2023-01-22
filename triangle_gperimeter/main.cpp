@@ -12,11 +12,11 @@ double get_phi(const point &p);
 
 /* 
     Given the phase of a point belonging to a circumference, compute the phases of 
-    all points that with it construct an equilater
+    all points that with it construct an equilater triangle inscribed in the circumference
 
     @param phi0 phase of one point
     @return phases of the three points belonging to the equilater triangle in [0,2PI] range
-    @note given a circumference an equilater triangle is the triangle with greatest perimeter
+    @note given a circumference an inscribed equilater triangle is the triangle with greatest perimeter
 */
 triangle_phis get_equilater_tr_phis(double phi0);
 
@@ -27,7 +27,7 @@ triangle_phis get_equilater_tr_phis(double phi0);
     @param phi
     @return index of nearest point to phi in phis
 */
-int get_closest_phi(const std::vector<double> &phis, double phi);
+int get_closest_phi_index(const std::vector<double> &phis, double phi);
 
 
  int main()
@@ -50,21 +50,21 @@ int get_closest_phi(const std::vector<double> &phis, double phi);
     // construct phases vector from points
     std::vector<double> phis(n_points);
     for (int i=0; i<n_points; i++) { 
-        phis[i] = get_phi(points[i]);
+        phis[i] = get_phi(points.at(i));
         }
 
-    // iterate through points constructing for each point p1 the triangle with the other
-    // points p2 and p3 that are the nearest to the equilater triangle (constructer with  p1) points
-    // Note: points are expressed in polar coordinates through the phase in [0, 2PI] range
+    // iterate through points, constructing for each point p1 a triangle with
+    // p2 and p3 that are the nearest to the equilater triangle (constructed with p1)
+    // Note: points are expressed in polar coordinates through phase in [0, 2PI] range
     triangle_phis eq_tr_phis;
     for (int i=0; i<n_points; i++) {
         // get points of the equilater triangle that has point pi
         eq_tr_phis = get_equilater_tr_phis(phis.at(i));
 
-        int index1 = get_closest_phi(phis, eq_tr_phis.phi1);
-        int index2 = get_closest_phi(phis, eq_tr_phis.phi2);
+        int index1 = get_closest_phi_index(phis, eq_tr_phis.phi1);
+        int index2 = get_closest_phi_index(phis, eq_tr_phis.phi2);
 
-        // construct greatest possible triangle given point pi and set of random points P 
+        // construct greatest possible triangle given point points(i) of the set 
         temp_triangle = {points.at(i), points.at(index1), points.at(index2)};
         temp_perimeter = get_perimeter(temp_triangle);
 
@@ -134,7 +134,7 @@ triangle_phis get_equilater_tr_phis(double phi0) {
     return triangle_phis{phi0, phi_left, phi_right};
 };
 
-int get_closest_phi(const std::vector<double> &phis, double phi) {
+int get_closest_phi_index(const std::vector<double> &phis, double phi) {
     int n = phis.size();
     double diff1(0);
     // diff2 is used to correctly compute the distance in rad
@@ -151,7 +151,7 @@ int get_closest_phi(const std::vector<double> &phis, double phi) {
 
         temp_diff = (diff1 < diff2) ? diff1 : diff2;
         
-        // if newly computed difference is les than stored, store new data
+        // if newly computed difference is less than stored, store new data
         if (diff > temp_diff) {
             diff = temp_diff;
             index = i;
