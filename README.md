@@ -3,7 +3,7 @@ Each folder has its own README to explain the problem, solutions, code performan
 
 # ekalman_radar folder
 
-Exstended **Kalam Filter** example appliocation:
+Extended **Kalam Filter** example appliocation:
 
 Given a radar compute position (x,y) and velocity (x_vel, y_vel) of an object in motion with E. Kalman filter. 
 

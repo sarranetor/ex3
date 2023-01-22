@@ -73,7 +73,7 @@ $azimuth = h_a(x_k) = arctan(y/x)$
 
 $velocity = h_v(x_k) = \sqrt(x.vel^2 + y.vel^2)$
 
-The relation is non linear thus the **Exstended** kalman filter needs to be used. This means to linearise the relationship using the taylor series with the first derivative. H will be the **Jacobian** matrix of $h(.)$ given the state variable.
+The relation is non linear thus the **extended** kalman filter needs to be used. This means to linearise the relationship using the taylor series with the first derivative. H will be the **Jacobian** matrix of $h(.)$ given the state variable.
 
     H = [y/sqrt(y*y + x*x), x/sqrt(y*y + x*x), 0, 0,
          x/(y*y + x*x),   - y/(y*y + x*x),     0, 0,
@@ -166,11 +166,11 @@ xy position                   | xy velocity
 
 # 4 Conclusions
 
-An exstended kalman filter prototype for filtering data from a radar application has been designed and tested. Prototype performance have been tested with simulated signals of objects moving in different situations. The prototype has been codeed in cpp using the Eigen library and tested.
+An extended kalman filter prototype for filtering data from a radar application has been designed and tested. Prototype performance have been tested with simulated signals of objects moving in different situations. The prototype has been codeed in cpp using the Eigen library and tested.
 
 The filter has shown improvements over the measured data in all reported tests. Although more simulations and more scenarions need to be tested to properly assess the filter performance.
 
-The observation model law is non linear, which made necessary the usage of the exstended kalman filter. Future possible work could be implementing an uscended kalman kilter to tackle the non linearity and compare performance with the exstended kalman implementation. Also a constant acceleration process model could be implemented instead of a constant velocity one and results could be compared.
+The observation model law is non linear, which made necessary the usage of the extended kalman filter. Future possible work could be implementing an uscended kalman kilter to tackle the non linearity and compare performance with the extended kalman implementation. Also a constant acceleration process model could be implemented instead of a constant velocity one and results could be compared.
 
 # 5 References
 
