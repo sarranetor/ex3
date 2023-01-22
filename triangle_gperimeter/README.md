@@ -17,11 +17,11 @@ Two methods are proposed and both are coded and has been proven empirically that
 
 **Method 1**:
 
-   1. Using The Equilater Triangle inscribed in the circumference. The equilater triangle inscribed in a circle is proven to be the triangle with the greatest perimeter possible.
+   1. Using The Equilater Triangle inscribed in the circumference. A equilater triangle inscribed in a circumference is proven to be the triangle with the greatest perimeter possible.
    
 - given a set P of N random points sampled.
 - given a point p0 belonging to P, it is possible to find the points p1 and p2 that form with p0 an equilater triangle with greatest perimeter.
-- p1' and p2' are the points belonging to the set P that are athe nearest respectively to point p1 and p2.
+- p1' and p2' are the points belonging to the set P that are the nearest respectively to point p1 and p2.
 - triangle [p0, p1',p2'] is the greatest triangle that can be formed in set P that has p0 in it.
 
 Thus is possible to iterate throughout all points belonging to P and fing the ones that create the triangle with greatest perimeter with O(n) complexity.
@@ -34,7 +34,7 @@ Thus is possible to iterate throughout all points belonging to P and fing the on
 - find "N chose 3" combinations.
 - search for the combination with greatest perimeter.
 
-The complexity of checking all combinations is O(n choose 3), this ends up being equivalent to O(min(n^3, n^(n-3))).
+The complexity of checking all combinations is O(n choose k), with k=3, this ends up being equivalent to O(min(n^3, n^(n-3))).
 
 
 ## Results and Conclusions
